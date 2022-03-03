@@ -1,11 +1,16 @@
-const express = require('express')
-const path = require('path')
-// const app = express();
+const express = require('express');
+const { engine } = require('express-handlebars');
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-const app = express()
-const port = 3000
+const app = express();
+
+app.engine('handlebars', engine({ extname: '.hbs', defaultLayout: "main"}));
+app.set('view engine', 'handlebars');
+
+const path = require('path');
+
+const port = 3000;
+
+// app.engine('handlebars', exphbs({}));
 
 app.use(express.static(path.join(__dirname, "static")))
 app.use('/', require(path.join(__dirname,'routes/blog.js')))
